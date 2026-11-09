@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">Шиномонтаж — Профессиональные услуги и калькулятор</title>
+  <meta name="description" id="pageMeta" content="Профессиональный шиномонтаж, балансировка, правка дисков, ремонт порезов. Онлайн калькулятор стоимости и запись.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --accent: #f97316;
+      --accent-hover: #ea580c;
+      --green: #10b981;
+      --bg-dark: #090d16;
+      --bg-card: #111827;
+      --bg-card-hover: #1e293b;
+      --border: #232f48;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --radius: 14px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* Top Ribbon */
+    .top-ribbon {
+      background: #04070e;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 8px 0;
+    }
+    .ribbon-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .rating-pill {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 13, 22, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+    }
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-icon {
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: #fff;
+      font-size: 20px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      font-weight: 800;
+    }
+    .logo-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+    .logo-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    .btn-accent { background: var(--accent); color: #fff; }
+    .btn-accent:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .btn-tg {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+    .btn-tg:hover { background: #2563eb; color: #fff; }
+    .btn-back {
+      background: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid var(--border);
+    }
+    .btn-back:hover { background: #334155; color: #fff; }
+
+    /* Hero */
+    .hero {
+      padding: 60px 0 70px;
+      background: radial-gradient(circle at 10% 20%, rgba(2, 132, 199, 0.12) 0%, transparent 45%),
+                  radial-gradient(circle at 90% 80%, rgba(249, 115, 22, 0.08) 0%, transparent 45%);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 30px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .hero-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .hero-features {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+    .feat-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Photo gallery card */
+    .hero-photo-card {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+    .main-photo {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      display: block;
+      background: #0f172a;
+    }
+    .photo-overlay {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      background: rgba(11, 15, 25, 0.88);
+      backdrop-filter: blur(8px);
+      padding: 14px 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .photo-overlay strong { display: block; font-size: 14px; margin-bottom: 2px; }
+    .photo-overlay span { font-size: 12px; color: var(--text-muted); }
+
+    /* Section common */
+    .section { padding: 70px 0; }
+    .sec-dark { background: #060911; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .sec-title {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 40px;
+    }
+    .sec-tag {
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+    }
+    .sec-title h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .sec-title p { color: var(--text-muted); font-size: 14.5px; }
+
+    /* Calculator */
+    .calc-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+    .calc-row { margin-bottom: 24px; }
+    .calc-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .radius-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .r-btn {
+      background: #090d16;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .r-btn:hover { border-color: var(--primary); }
+    .r-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+    .calc-select {
+      width: 100%;
+      background: #090d16;
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .cb-opt {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #090d16;
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      cursor: pointer;
+    }
+    .calc-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .calc-price-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    .calc-price-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; }
+    .calc-price-val { font-size: 32px; font-weight: 900; color: #38bdf8; font-family: 'Space Grotesk', sans-serif; }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .service-card p { font-size: 13.5px; color: var(--text-muted); margin-bottom: 16px; flex-grow: 1; }
+    .s-price { font-size: 20px; font-weight: 800; color: var(--primary); margin-bottom: 12px; }
+
+    /* Reviews */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .rev-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+    .rc-top { display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .rc-author { font-weight: 700; font-size: 14.5px; }
+    .rc-stars { color: #fbbf24; font-size: 13px; }
+    .rc-text { font-size: 13.5px; color: #cbd5e1; line-height: 1.6; }
+
+    /* Contacts Card */
+    .contacts-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .c-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+    .c-item { display: flex; gap: 12px; font-size: 14px; }
+    .c-item a { color: var(--primary); font-weight: 700; }
+    .c-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* Footer */
+    footer {
+      background: #04070e;
+      border-top: 1px solid var(--border);
+      padding: 30px 0;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #10b981;
+      color: #022c22;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 9999;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    @media (max-width: 900px) {
+      .hero-grid, .contacts-card, .options-grid { grid-template-columns: 1fr; }
+      .header-content { flex-direction: column; align-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Ribbon -->
+  <div class="top-ribbon">
+    <div class="container ribbon-flex">
+      <span id="ribbonLocation">📍 Загрузка локации...</span>
+      <span id="ribbonSchedule">⏰ Режим работы</span>
+      <span class="rating-pill" id="ribbonRating">⭐ 4.8 в 2ГИС</span>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo-block">
+        <div class="logo-icon">🛞</div>
+        <div>
+          <div class="logo-title" id="headerName">Шиномонтаж</div>
+          <div class="logo-sub" id="headerSub">Профессиональный автосервис</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a href="../index.html" class="btn btn-back">← Все 10 000 сайтов</a>
+        <button class="btn btn-back" id="shareBtn" onclick="copyShareLink()">📋 Поделиться сайтом</button>
+        <a href="#" id="tgHeaderBtn" target="_blank" class="btn btn-tg">✈️ Telegram</a>
+        <a href="#" id="phoneHeaderBtn" class="btn btn-primary">📞 Позвонить</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <div class="hero-badge">✓ Проверенный шиномонтаж без скрытых доплат</div>
+        <h1 id="heroTitle">Профессиональный шиномонтаж</h1>
+        <p class="hero-desc" id="heroDesc">
+          Точная балансировка, переобувка колес R13–R22, устранение проколов и ремонт боковых порезов любой сложности.
+        </p>
+
+        <div class="hero-features">
+          <div class="feat-pill">✓ Динамометрическая затяжка</div>
+          <div class="feat-pill">✓ Запись через Telegram</div>
+          <div class="feat-pill">✓ Гарантия на работы</div>
+          <div class="feat-pill">✓ Зерновой кофе для клиентов</div>
+        </div>
+
+        <div class="hero-cta">
+          <a href="#calculator" class="btn btn-accent">Рассчитать стоимость онлайн</a>
+          <a href="#" id="heroTgBtn" target="_blank" class="btn btn-tg">Написать в Telegram</a>
+        </div>
+      </div>
+
+      <div class="hero-media">
+        <div class="hero-photo-card">
+          <img src="" id="heroMainPhoto" alt="Шиномонтаж" class="main-photo">
+          <div class="photo-overlay">
+            <strong id="overlayTitle">Мастерская шиномонтажа</strong>
+            <span id="overlayAddr">Адрес уточняется</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Calculator Section -->
+  <section id="calculator" class="section sec-dark">
+    <div class="container">
+      <div class="sec-title">
+        <div class="sec-tag">Онлайн-расчёт</div>
+        <h2>Калькулятор стоимости шиномонтажа</h2>
+        <p>Выберите радиус и необходимые дополнительные услуги для мгновенного точного расчета.</p>
+      </div>
+
+      <div class="calc-box">
+        <div class="calc-row">
+          <label class="calc-label">Радиус дисков (R):</label>
+          <div class="radius-pills" id="radiusPills">
+            <button class="r-btn active" data-radius="r13_14">R13 - R14</button>
+            <button class="r-btn" data-radius="r15_16">R15 - R16</button>
+            <button class="r-btn" data-radius="r17_18">R17 - R18</button>
+            <button class="r-btn" data-radius="r19_20">R19 - R20</button>
+            <button class="r-btn" data-radius="r21_22">R21 - R22</button>
+          </div>
+        </div>
+
+        <div class="calc-row">
+          <label class="calc-label">Тип транспортного средства:</label>
+          <select id="vehicleType" class="calc-select">
+            <option value="0">Легковой автомобиль (Седан / Хэтчбек)</option>
+            <option value="suv">Кроссовер / Внедорожник / Минивэн</option>
+          </select>
+        </div>
+
+        <div class="calc-row">
+          <label class="calc-label">Дополнительные услуги:</label>
+          <div class="options-grid">
+            <label class="cb-opt">
+              <input type="checkbox" id="optStraight"> Правка литого диска (+1 200 ₽)
+            </label>
+            <label class="cb-opt">
+              <input type="checkbox" id="optVulcan"> Ремонт пореза / вулканизация (+900 ₽)
+            </label>
+            <label class="cb-opt">
+              <input type="checkbox" id="optSpikes"> Дошиповка ремонтными шипами 50 шт. (+1 250 ₽)
+            </label>
+            <label class="cb-opt">
+              <input type="checkbox" id="optStorage"> Сезонное хранение шин (+2 500 ₽)
+            </label>
+          </div>
+        </div>
+
+        <div class="calc-footer">
+          <div class="calc-price-wrap">
+            <span class="calc-price-label">Итоговая стоимость:</span>
+            <span class="calc-price-val" id="calcPriceDisplay">2 400 ₽</span>
+          </div>
+          <a href="#" id="calcBookBtn" target="_blank" class="btn btn-accent" style="padding:14px 24px;">
+            Записаться по этой цене в Telegram →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-title">
+        <div class="sec-tag">Услуги мастерской</div>
+        <h2>Популярные услуги и цены</h2>
+        <p>Работаем на высокоточном оборудовании. Согласовываем стоимость до начала работ.</p>
+      </div>
+
+      <div class="services-grid" id="servicesGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="section sec-dark">
+    <div class="container">
+      <div class="sec-title">
+        <div class="sec-tag">Отзывы клиентов</div>
+        <h2>Опыт автовладельцев в 2ГИС</h2>
+        <p id="reviewsCountTitle">Реальные оценки и отзывы клиентов.</p>
+      </div>
+
+      <div class="reviews-grid" id="reviewsGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacts -->
+  <section class="section">
+    <div class="container">
+      <div class="contacts-card">
+        <div>
+          <h2 style="font-family:'Space Grotesk',sans-serif; font-size:28px; margin-bottom:12px;">Ждем вас в мастерской</h2>
+          <p style="color:var(--text-muted); margin-bottom:24px;">Приезжайте по живой очереди или бронируйте точное время через Telegram.</p>
+
+          <div class="c-list">
+            <div class="c-item">
+              <span>📍</span>
+              <div>
+                <strong>Адрес:</strong>
+                <div id="contactAddress">Загрузка адреса...</div>
+              </div>
+            </div>
+            <div class="c-item">
+              <span>⏰</span>
+              <div>
+                <strong>График работы:</strong>
+                <div id="contactSchedule">Ежедневно 09:00 - 21:00</div>
+              </div>
+            </div>
+            <div class="c-item">
+              <span>📞</span>
+              <div>
+                <strong>Телефон:</strong>
+                <div><a href="#" id="contactPhoneLink">+7 ...</a></div>
+              </div>
+            </div>
+            <div class="c-item">
+              <span>✈️</span>
+              <div>
+                <strong>Telegram:</strong>
+                <div><a href="#" id="contactTgLink" target="_blank">Написать напрямую в Telegram</a></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="c-btns">
+            <a href="#" id="contactCallBtn" class="btn btn-primary">Позвонить прямо сейчас</a>
+            <a href="#" id="contactRouteBtn" target="_blank" class="btn btn-back">Открыть в 2ГИС</a>
+          </div>
+        </div>
+
+        <div style="background:#090d16; border:1px solid var(--border); border-radius:12px; padding:28px; text-align:center;">
+          <div style="font-size:48px; margin-bottom:12px;">🗺️</div>
+          <h3 style="font-size:18px; margin-bottom:8px;">Удобная парковка и теплый бокс</h3>
+          <p style="color:var(--text-muted); font-size:13.5px; margin-bottom:20px;">
+            Въезд свободный, без пропусков. Зона ожидания с Wi-Fi и горячим кофе.
+          </p>
+          <a href="#" id="contactMapDirectBtn" target="_blank" class="btn btn-accent">Построить маршрут</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div id="footerCopy">© 2026 Шиномонтаж. Все права защищены.</div>
+      <div style="margin-top:8px;">
+        <a href="../index.html" style="color:var(--primary);">← Вернуться к поиску 10 000 компаний</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div id="toast" class="toast">✓ Ссылка на сайт компании скопирована!</div>
+
+  <script>
+    let currentBiz = null;
+    let selectedRadius = 'r13_14';
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetId = urlParams.get('id') || '70000001037985828';
+    const prefix = targetId.slice(0, 4);
+
+    function showToast(text) {
+      const toast = document.getElementById('toast');
+      toast.textContent = text || '✓ Ссылка скопирована!';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    function copyShareLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        showToast('✓ Ссылка на персональный сайт скопирована в буфер!');
+      });
+    }
+
+    // Load chunk
+    fetch(`../data/${prefix}.json`)
+      .then(res => res.json())
+      .then(chunk => {
+        currentBiz = chunk[targetId] || Object.values(chunk)[0];
+        initPage(currentBiz);
+      })
+      .catch(err => {
+        // Fallback to sample
+        console.error("Chunk load err:", err);
+      });
+
+    function initPage(b) {
+      document.title = `${b.name} — Шиномонтаж в г. ${b.city}`;
+      document.getElementById('headerName').textContent = b.name;
+      document.getElementById('headerSub').textContent = `г. ${b.city}, ${b.address}`;
+      document.getElementById('ribbonLocation').textContent = `📍 г. ${b.city}, ${b.address}`;
+      document.getElementById('ribbonSchedule').textContent = `⏰ ${b.schedule}`;
+      document.getElementById('ribbonRating').textContent = `⭐ ${b.rating} в 2ГИС (${b.review_count} отзывов)`;
+
+      document.getElementById('heroTitle').textContent = `Шиномонтаж «${b.name}»`;
+      document.getElementById('heroDesc').textContent = `Профессиональный шиномонтаж и обслуживание колес в г. ${b.city}. Правка дисков, точная балансировка, устранение проколов. Быстрая запись через Telegram.`;
+
+      document.getElementById('overlayTitle').textContent = b.name;
+      document.getElementById('overlayAddr').textContent = `г. ${b.city}, ${b.address}`;
+
+      const photoUrl = (b.photos && b.photos.length > 0) ? b.photos[0] : 'https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=1200&q=80';
+      document.getElementById('heroMainPhoto').src = photoUrl;
+
+      // Contacts
+      document.getElementById('tgHeaderBtn').href = b.telegram;
+      document.getElementById('heroTgBtn').href = b.telegram;
+      document.getElementById('contactTgLink').href = b.telegram;
+
+      document.getElementById('phoneHeaderBtn').href = `tel:${b.phone}`;
+      document.getElementById('phoneHeaderBtn').textContent = `📞 ${b.phone}`;
+      document.getElementById('contactPhoneLink').href = `tel:${b.phone}`;
+      document.getElementById('contactPhoneLink').textContent = b.phone;
+      document.getElementById('contactCallBtn').href = `tel:${b.phone}`;
+
+      document.getElementById('contactAddress').textContent = `г. ${b.city}, ${b.address}`;
+      document.getElementById('contactSchedule').textContent = b.schedule;
+
+      const gisLink = `https://2gis.ru/firm/${b.id}`;
+      document.getElementById('contactRouteBtn').href = gisLink;
+      document.getElementById('contactMapDirectBtn').href = gisLink;
+
+      document.getElementById('footerCopy').textContent = `© 2026 «${b.name}». г. ${b.city}, ${b.address}.`;
+
+      // Services Grid
+      const services = b.services || ["Сезонная переобувка", "Балансировка", "Ремонт проколов", "Правка дисков", "Ошиповка"];
+      const sGrid = document.getElementById('servicesGrid');
+      sGrid.innerHTML = services.map((s, idx) => `
+        <div class="service-card">
+          <div style="font-size:28px; margin-bottom:8px;">${['🛞', '🔄', '⚙️', '🩹', '❄️', '🏎️'][idx % 6]}</div>
+          <h3>${s}</h3>
+          <p>Качественное выполнение на сертифицированных станках с гарантией.</p>
+          <div class="s-price">от ${1200 + (idx * 300)} ₽</div>
+          <a href="${b.telegram}" target="_blank" class="btn btn-primary" style="width:100%;">Записаться в Telegram</a>
+        </div>
+      `).join('');
+
+      // Reviews Grid
+      const revs = b.reviews || [];
+      const rGrid = document.getElementById('reviewsGrid');
+      rGrid.innerHTML = revs.map(r => `
+        <div class="rev-card">
+          <div class="rc-top">
+            <span class="rc-author">${r.author}</span>
+            <span class="rc-stars">★★★★★</span>
+          </div>
+          <div style="font-size:11.5px; color:var(--text-muted); margin-bottom:10px;">Проверенный отзыв 2ГИС</div>
+          <p class="rc-text">«${r.text}»</p>
+        </div>
+      `).join('');
+
+      updateCalculator();
+    }
+
+    // Calculator Logic
+    const radiusBtns = document.querySelectorAll('.r-btn');
+    const vehicleSelect = document.getElementById('vehicleType');
+    const optStraight = document.getElementById('optStraight');
+    const optVulcan = document.getElementById('optVulcan');
+    const optSpikes = document.getElementById('optSpikes');
+    const optStorage = document.getElementById('optStorage');
+    const priceDisplay = document.getElementById('calcPriceDisplay');
+    const bookBtn = document.getElementById('calcBookBtn');
+
+    radiusBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        radiusBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedRadius = btn.dataset.radius;
+        updateCalculator();
+      });
+    });
+
+    [vehicleSelect, optStraight, optVulcan, optSpikes, optStorage].forEach(el => {
+      el.addEventListener('change', updateCalculator);
+    });
+
+    function updateCalculator() {
+      if (!currentBiz) return;
+      const prices = currentBiz.prices || { r13_14: 2400, r15_16: 2800, r17_18: 3400, r19_20: 4200, r21_22: 5000, suv_markup: 500 };
+      let total = prices[selectedRadius] || 2400;
+
+      if (vehicleSelect.value === 'suv') total += (prices.suv_markup || 500);
+      if (optStraight.checked) total += 1200;
+      if (optVulcan.checked) total += 900;
+      if (optSpikes.checked) total += 1250;
+      if (optStorage.checked) total += 2500;
+
+      priceDisplay.textContent = total.toLocaleString('ru-RU') + ' ₽';
+
+      if (currentBiz.telegram) {
+        bookBtn.href = currentBiz.telegram;
+      }
+    }
+  </script>
+</body>
+</html>
